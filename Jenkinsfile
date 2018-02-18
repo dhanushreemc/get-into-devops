@@ -10,8 +10,9 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
+        def customImage = docker.build("helloworld:${env.BUILD_ID}")
+        /** app = docker.build("hellonode") **/
 
-        app = docker.build("hellonode")
     }
 
     stage('Test image') {
@@ -30,7 +31,7 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         
        
-            docker.withRegistry('devonartis/', 'docker-hub-credentials') {
+            docker.withRegistry('', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
