@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
         
-        app = docker.build("devonartis/hellonode:${env.BUILD_ID}") 
+        app = docker.build("hellonode") 
 
     }
 
@@ -29,15 +29,12 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-            docker login -u devonartis -p Welcome1JDcl3
-            app.push()
-            app.push("latest")
-            /*
-            docker.withRegistry('http://', 'docker-hub-credentials') {
+
+            docker.withRegistry('https://hub.docker.com/r/devonartis/"', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest") 
 
-        } */
+        }
 
         
 
