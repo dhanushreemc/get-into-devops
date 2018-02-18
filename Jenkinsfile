@@ -29,7 +29,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        
+            docker login -u devonartis -p Welcome1JDcl3
             app.push()
             app.push("latest")
             /*
